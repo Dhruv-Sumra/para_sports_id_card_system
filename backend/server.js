@@ -26,15 +26,15 @@ const PORT = process.env.PORT || 5000;
 
 // Security and performance middleware
 app.use(helmet({
-  contentSecurityPolicy: false, // Disable for development
+  contentSecurityPolicy: false, 
   crossOriginEmbedderPolicy: false
 }));
-app.use(compression()); // Enable gzip compression
+app.use(compression()); 
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000, 
+  max: 100, 
   message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
