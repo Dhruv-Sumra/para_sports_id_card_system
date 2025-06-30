@@ -2,8 +2,8 @@
 // or, if using ES modules:
 import dotenv from 'dotenv';
 dotenv.config({path: 'backend/.env'});
-console.log('DEBUG: MONGODB_URI from .env is:', process.env.MONGODB_URI);
-process.env.MONGODB_URI = 'mongodb+srv://gujaratparasports:paraSports07@parasports.sc63qgr.mongodb.net/?retryWrites=true&w=majority&appName=ParaSports';
+// console.log('DEBUG: MONGODB_URI from .env is:', process.env.MONGODB_URI);
+// process.env.MONGODB_URI = 'mongodb+srv://gujaratparasports:paraSports07@parasports.sc63qgr.mongodb.net/?retryWrites=true&w=majority&appName=ParaSports';
 
 import express from 'express';
 import mongoose from 'mongoose';
@@ -43,7 +43,7 @@ app.use('/api/', limiter);
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: process.env.REACT_APP_API_URL || 'http://localhost:5173',    
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -123,9 +123,9 @@ const connectDB = async () => {
   try {
     const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/para-sports';
     if (!process.env.MONGODB_URI) {
-      console.warn('⚠️  MONGODB_URI not set in .env, using local MongoDB.');
+      // console.warn('⚠️  MONGODB_URI not set in .env, using local MongoDB.');
     } else {
-      console.log('🌐 Using MongoDB URI from .env:', process.env.MONGODB_URI);
+      // console.log('🌐 Using MongoDB URI from .env:', process.env.MONGODB_URI);
     }
     await mongoose.connect(mongoURI, {
       maxPoolSize: 10,
@@ -133,38 +133,38 @@ const connectDB = async () => {
       socketTimeoutMS: 45000,
       bufferCommands: false,
     });
-    console.log('✅ Connected to MongoDB successfully!');
+    // console.log('✅ Connected to MongoDB successfully!');
     app.listen(PORT, () => {
-      console.log(`🚀 Server is running on port ${PORT}`);
-      console.log(`📱 Frontend should connect to: http://localhost:${PORT}`);
-      console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
-      console.log(`⚡ Performance optimizations enabled`);
+      // console.log(`🚀 Server is running on port ${PORT}`);
+      // console.log(`📱 Frontend should connect to: http://localhost:${PORT}`);
+      // console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
+      // console.log(`⚡ Performance optimizations enabled`);
     });
   } catch (error) {
-    console.error('❌ MongoDB connection error:', error.message);
-    console.log('💡 Make sure MongoDB is running on your system');
-    console.log('💡 Or use MongoDB Atlas cloud service');
-    console.log('💡 Check your MONGODB_URI in .env file');
+    // console.error('❌ MongoDB connection error:', error.message);
+    // console.log('💡 Make sure MongoDB is running on your system');
+    // console.log('💡 Or use MongoDB Atlas cloud service');
+    // console.log('💡 Check your MONGODB_URI in .env file');
     app.listen(PORT, () => {
-      console.log(`⚠️  Server running without database on port ${PORT}`);
-      console.log(`📱 Frontend should connect to: http://localhost:${PORT}`);
+      // console.log(`⚠️  Server running without database on port ${PORT}`);
+      // console.log(`📱 Frontend should connect to: http://localhost:${PORT}`);
     });
   }
 };
 
 process.on('unhandledRejection', (err, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', err);
+  // console.error('Unhandled Rejection at:', promise, 'reason:', err);
 });
 
 process.on('uncaughtException', (err) => {
-  console.error('Uncaught Exception:', err);
+  // console.error('Uncaught Exception:', err);
   process.exit(1);
 });
 
 process.on('SIGTERM', () => {
-  console.log('SIGTERM received, shutting down gracefully');
+  // console.log('SIGTERM received, shutting down gracefully');
   mongoose.connection.close(() => {
-    console.log('MongoDB connection closed');
+    // console.log('MongoDB connection closed');
     process.exit(0);
   });
 });
