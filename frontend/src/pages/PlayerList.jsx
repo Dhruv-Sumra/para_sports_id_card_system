@@ -128,7 +128,7 @@ const PlayerList = () => {
   // Regenerate ID card
   const regenerateIdCard = async (playerId) => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/players/${playerId}/regenerate-idcard`);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/players/${playerId}/regenerate-idcard`);
       if (response.data.success) {
         toast.success('ID card regenerated and sent to email!');
       }

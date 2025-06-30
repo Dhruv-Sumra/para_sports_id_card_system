@@ -17,7 +17,7 @@ const PlayerDetails = () => {
   const fetchPlayerDetails = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/players/${id}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/players/${id}`);
       
       if (response.data.success) {
         setPlayer(response.data.data);
