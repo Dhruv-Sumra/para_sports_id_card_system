@@ -21,6 +21,9 @@ import idCardRoutes from './routes/idCardRoutes.js';
 // Import middleware
 import { errorHandler } from './middleware/errorHandler.js';
 
+
+
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
